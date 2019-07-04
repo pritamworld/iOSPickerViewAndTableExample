@@ -19,7 +19,12 @@ class CourseTableViewController: UIViewController, UITableViewDelegate, UITableV
 
         self.tblCourseList.delegate = self
         self.tblCourseList.dataSource = self
-        // Do any additional setup after loading the view.
+        
+        self.tblCourseList.register(UITableViewCell.self, forCellReuseIdentifier: "cellCourse")
+        
+        self.tblCourseList.separatorStyle = .singleLine
+        self.tblCourseList.separatorColor = .blue
+        self.tblCourseList.separatorInset = .zero
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +55,7 @@ class CourseTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let  cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cellCourse")
+        let  cell = tableView.dequeueReusableCell(withIdentifier: "cellCourse", for: indexPath)
         
         cell.textLabel?.text = self.courseArray[indexPath.row]
         cell.detailTextLabel?.text = "I am in detailed label"
